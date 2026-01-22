@@ -1,16 +1,16 @@
 {% set version = "13.1.80" %}
 {% set arm_variant_type = arm_variant_type | default("sbsa") %}
 {% set cuda_version = "13.1" %}
-{% set platform = "linux-x86_64" %}  # [linux64]
-{% set platform = "linux-sbsa" %}    # [linux and aarch64]
+{% set platform = "linux-x86_64" %}  # [linux]
+{% set platform = "linux-sbsa" %}    # [aarch64]
 {% set platform = "windows-x86_64" %}  # [win]
 {% set extension = "tar.xz" %}  # [not win]
 {% set extension = "zip" %}  # [win]
 
 {% set soname = version.split(".")[0] %}
 
-{% set sha256 = "e3f427f96492956527614c1283760463f7c02319d3e44c4b062fca17429d5951" %}  # [linux64]
-{% set sha256 = "94704a1cc2609d471ac1c157e43cc9d89cc437de3b85ec3b2df45199cf66d1f9" %}  # [linux and aarch64]
+{% set sha256 = "e3f427f96492956527614c1283760463f7c02319d3e44c4b062fca17429d5951" %}  # [linux]
+{% set sha256 = "94704a1cc2609d471ac1c157e43cc9d89cc437de3b85ec3b2df45199cf66d1f9" %}  # [aarch64]
 {% set sha256 = "9215c7ed572ed74c6167589c32f135a65853cbc35e7d417ec29ddd886be85d43" %}  # [win]
 
 package:
@@ -22,8 +22,8 @@ source:
   sha256: {{ sha256 }}
 
 build:
-  number: 1
-  skip: true  # [osx or ppc64le]
+  number: 0
+  skip: true  # [osx]
 
 requirements:
   build:
@@ -41,7 +41,7 @@ outputs:
         - {{ compiler('c') }}
         - {{ compiler('cxx') }}
         - {{ stdlib('c') }}
-        - arm-variant * {{ arm_variant_type }}  # [linux and aarch64]
+        - arm-variant * {{ arm_variant_type }}  # [aarch64]
       host:
         - cuda-version {{ cuda_version }}
       run:
@@ -58,7 +58,7 @@ about:
   license: LicenseRef-NVIDIA-End-User-License-Agreement
   license_url: https://docs.nvidia.com/cuda/eula/index.html
   summary: TileIR is a portable and language agnostic intermediate representation for CUDA kernels
-  description:
+  description: |
     With Tile IR, we introduce a new operation set and programming model to retain
     CUDA’s performance across architectures while regaining portability and improving
     productivity for developers using matrix operations on new architectures.
@@ -66,8 +66,11 @@ about:
     that we can innovate new approaches in hardware without invalidating investments
     in software.
   doc_url: https://docs.nvidia.com/cuda/index.html
+  dev_url: https://docs.nvidia.com/cuda/index.html
 
 extra:
+  skip-lints:
+    - license_file_overspecified
   feedstock-name: cuda-tileiras
   recipe-maintainers:
     - conda-forge/cuda
