@@ -22,9 +22,8 @@ source:
   sha256: {{ sha256 }}
 
 build:
-  number: 0
+  number: 1
   skip: true  # [osx]
-  binary_relocation: false
 
 requirements:
   build:
@@ -48,6 +47,8 @@ outputs:
         - cuda-version {{ cuda_version }}
       run:
         - {{ pin_compatible("cuda-version", max_pin="x.x") }}
+        - cuda-nvcc-tools
+        - cuda-nvvm-impl
     test:
       commands:
         - test -f $PREFIX/bin/tileiras                    # [linux]
