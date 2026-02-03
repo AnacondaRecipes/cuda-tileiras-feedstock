@@ -22,7 +22,7 @@ source:
   sha256: {{ sha256 }}
 
 build:
-  number: 2
+  number: 3
   skip: true  # [osx or ppc64le]
 
 requirements:
@@ -31,10 +31,11 @@ requirements:
 
 outputs:
   - name: cuda-tileiras
-    build:   # [win]
-      script:   # [win]
-        - move bin\* %LIBRARY_BIN%   # [win]
-    files:   # [linux]
+    build:
+      binary_relocation: false
+      script:                        # [win]
+         - move bin\* %LIBRARY_BIN%  # [win]
+    files:             # [linux]
       - bin/tileiras   # [linux]
     requirements:
       build:
@@ -46,7 +47,8 @@ outputs:
         - cuda-version {{ cuda_version }}
       run:
         - {{ pin_compatible("cuda-version", max_pin="x.x") }}
-        - cuda-nvcc
+        - cuda-nvcc-tools
+        - cuda-nvvm-impl
     test:
       commands:
         - test -f $PREFIX/bin/tileiras                    # [linux]
