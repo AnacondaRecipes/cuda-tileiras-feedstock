@@ -1,17 +1,17 @@
-{% set version = "13.1.80" %}
+{% set version = "13.2.78" %}
 {% set arm_variant_type = arm_variant_type | default("sbsa") %}
-{% set cuda_version = "13.1" %}
-{% set platform = "linux-x86_64" %}  # [linux]
-{% set platform = "linux-sbsa" %}    # [aarch64]
+{% set cuda_version = "13.2" %}
+{% set platform = "linux-x86_64" %}  # [linux64]
+{% set platform = "linux-sbsa" %}  # [linux and aarch64]
 {% set platform = "windows-x86_64" %}  # [win]
 {% set extension = "tar.xz" %}  # [not win]
 {% set extension = "zip" %}  # [win]
 
 {% set soname = version.split(".")[0] %}
 
-{% set sha256 = "e3f427f96492956527614c1283760463f7c02319d3e44c4b062fca17429d5951" %}  # [linux]
-{% set sha256 = "94704a1cc2609d471ac1c157e43cc9d89cc437de3b85ec3b2df45199cf66d1f9" %}  # [aarch64]
-{% set sha256 = "9215c7ed572ed74c6167589c32f135a65853cbc35e7d417ec29ddd886be85d43" %}  # [win]
+{% set sha256 = "59dc5682a5bb2ad0068d1661810910c43d6bff37eca1cd7b27eee86423a58195" %}  # [linux64]
+{% set sha256 = "fac4994a68826c0fb79174200c6e8797b2a685203348a34bd5d3b4d8183be0bb" %}  # [linux and aarch64]
+{% set sha256 = "a1843d3c52e89a4ad0190209649a336e5fe24e00089377b65c7092a7127fac3f" %}  # [win]
 
 package:
   name: cuda-tileiras-split
@@ -22,7 +22,7 @@ source:
   sha256: {{ sha256 }}
 
 build:
-  number: 1
+  number: 0
   skip: true  # [osx]
 
 requirements:
