@@ -60,6 +60,7 @@ about:
   license_file: LICENSE
   license: LicenseRef-NVIDIA-End-User-License-Agreement
   license_url: https://docs.nvidia.com/cuda/eula/index.html
+  license_family: Other
   summary: TileIR is a portable and language agnostic intermediate representation for CUDA kernels
   description: |
     With Tile IR, we introduce a new operation set and programming model to retain
@@ -72,8 +73,6 @@ about:
   dev_url: https://docs.nvidia.com/cuda/index.html
 
 extra:
-  skip-lints:
-    - license_file_overspecified
   feedstock-name: cuda-tileiras
   recipe-maintainers:
     - conda-forge/cuda
