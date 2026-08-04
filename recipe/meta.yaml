@@ -73,6 +73,8 @@ about:
   dev_url: https://docs.nvidia.com/cuda/index.html
 
 extra:
+  skip-lints:
+    - deprecate_license_url
   feedstock-name: cuda-tileiras
   recipe-maintainers:
     - conda-forge/cuda
