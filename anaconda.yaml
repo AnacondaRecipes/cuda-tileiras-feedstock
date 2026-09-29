@@ -3,3 +3,5 @@ upstream_sources:
   - webpage:
       url: https://api.anaconda.org/package/conda-forge/cuda-tileiras
       regex: '"version":\s*"([^"]+)"'
+    packages:
+      - cuda-tileiras
